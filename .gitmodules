@@ -1,6 +1,6 @@
 [submodule "Frontend"]
 	path = Frontend
-	url = https://github.com/Javafest2025/frontend.git
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/frontend
 [submodule "Microservices/user-service"]
 	path = Microservices/user-service
 	url = https://github.com/Javafest2025/user_service.git
@@ -18,10 +18,25 @@
 	url = https://github.com/Javafest2025/project_service.git
 [submodule "AI-Agents/extractor"]
 	path = AI-Agents/extractor
-	url = https://github.com/Javafest2025/extractor
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/extractor
 [submodule "AI-Agents/paper-search"]
 	path = AI-Agents/paper-search
-	url = https://github.com/Javafest2025/paper-search
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/paper-search
 [submodule "AI-Agents/gap-analyzer"]
 	path = AI-Agents/gap-analyzer
-	url = https://github.com/Javafest2025/gap_analyzer.git
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/gap-analyzer
+[submodule "Microservices/project_service"]
+	path = Microservices/project_service
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/project_service
+[submodule "Microservices/user_service"]
+	path = Microservices/user_service
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/user_service
+[submodule "Microservices/notification_service"]
+	path = Microservices/notification_service
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/notification_service
+[submodule "Microservices/api_gateway"]
+	path = Microservices/api_gateway
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/api_gateway
+[submodule "Microservices/service_registry"]
+	path = Microservices/service_registry
+	url = https://github.com/ScholarAI-Echologyx-Hackathon-2025/service_registry
