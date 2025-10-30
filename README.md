@@ -1,143 +1,316 @@
-# ScholarAI Meta Repository
+# ScholarAI - Meta Repository
 
-This is the **Meta Repository** for the ScholarAI project, which organizes and orchestrates multiple independent components:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- `Frontend/` — Next.js frontend
-- `Microservices/` — Java Spring Boot backend services
-- `AI-Agents/` — Python/FastAPI-based AI agents
+The main repository containing all ScholarAI components as Git submodules. This repository serves as the central hub for the entire ScholarAI ecosystem - a comprehensive research assistant platform powered by AI.
 
-Each component is maintained in a **separate GitHub repository** and tracked here using **Git submodules**.
+## 🏗️ Architecture Overview
 
----
-
-## 📁 Project Structure
+ScholarAI is a distributed microservices application with AI-powered agents for academic research assistance. The platform enables researchers to search papers, extract insights, analyze research gaps, and manage their research workflow.
 
 ```
-Meta/
-├── Frontend/                        # → frontend submodule
-├── Microservices/
-│   └── user-service/               # → user_service submodule
-├── AI-Agents/                      # → (add AI agent submodules here)
-├── .gitmodules                     # Submodule metadata
-└── .github/workflows/             # CI/CD pipelines
+ScholarAI/
+├── Frontend/                    # Next.js web application
+├── Microservices/              # Spring Boot microservices
+│   ├── service_registry        # Eureka service discovery
+│   ├── api_gateway            # Spring Cloud Gateway
+│   ├── user_service           # User auth & profiles
+│   ├── notification_service   # Email notifications
+│   └── project_service        # Research project management
+├── AI-Agents/                 # Python FastAPI AI services
+│   ├── paper-search           # Academic paper search
+│   ├── extractor              # PDF content extraction
+│   └── gap-analyzer           # Research gap analysis
+├── Docker/                    # Docker compose configurations
+└── Scripts/                   # Deployment scripts
 ```
 
----
+## 🚀 Quick Start
 
-## 🔧 Cloning the Meta Repo
+### Prerequisites
 
-When you first clone this repo, use:
+- **Git** 2.13+ (with submodule support)
+- **Docker** 20.10+ and Docker Compose
+- **Node.js** 18+ (for frontend development)
+- **Java** 21+ (for microservices development)
+- **Python** 3.11+ (for AI agents development)
+
+### Clone with Submodules
 
 ```bash
-git clone --recurse-submodules https://github.com/Javafest2025/meta.git
-```
+# Clone the repository with all submodules
+git clone --recursive https://github.com/ScholarAI-Echologyx-Hackathon-2025/meta.git
 
-Or if you already cloned it without submodules:
-
-```bash
+# Or if already cloned, initialize submodules
 git submodule update --init --recursive
 ```
 
----
+### Environment Setup
 
-## 🚀 Adding a New Submodule (Microservice or Agent)
-
-To add a new service or agent to the meta-repo:
-
+1. Copy environment templates:
 ```bash
-# Format: git submodule add <repo-url> <path-in-meta-repo>
-git submodule add https://github.com/Javafest2025/auth-service.git Microservices/auth-service
+cp env.example .env
+cp Docker/env.example Docker/.env
 ```
 
-Then commit:
+2. Configure environment variables in `.env` files for:
+   - Database credentials
+   - API keys (OpenAI, Semantic Scholar, etc.)
+   - Service URLs
+   - Email/SMTP settings
+
+### Running the Application
+
+#### Development Mode (All Services)
 
 ```bash
-git add .gitmodules Microservices/auth-service
-git commit -m "Added auth-service as submodule"
-git push origin main
+# Start all services with Docker Compose
+cd Docker
+docker-compose -f services.yml up -d
 ```
 
----
-
-## 🔁 Updating Submodules
-
-If a submodule (e.g., `frontend` or `user-service`) has new commits:
+#### Production Mode
 
 ```bash
-# Step into the submodule
-cd Frontend
+# Start production services
+cd Docker
+docker-compose -f services-prod.yml up -d
+```
+
+#### Individual Services
+
+Each submodule can be run independently. See their respective README files:
+
+- [Frontend Documentation](./Frontend/README.md)
+- [Service Registry](./Microservices/service_registry/README.md)
+- [API Gateway](./Microservices/api_gateway/README.md)
+- [User Service](./Microservices/user_service/README.md)
+- [Notification Service](./Microservices/notification_service/README.md)
+- [Project Service](./Microservices/project_service/README.md)
+- [Paper Search Agent](./AI-Agents/paper-search/README.md)
+- [Extractor Agent](./AI-Agents/extractor/README.md)
+- [Gap Analyzer Agent](./AI-Agents/gap-analyzer/README.md)
+
+## 📦 Components
+
+### Frontend (Next.js + TypeScript)
+
+Modern web application built with:
+- Next.js 14 with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- shadcn/ui components
+- Real-time chat interface
+
+**Features:**
+- User authentication (email/password, Google, GitHub)
+- Research paper search and analysis
+- AI-powered chat assistant
+- Research gap analysis
+- Document library management
+- Project organization
+
+### Microservices (Spring Boot + Java 21)
+
+#### Service Registry (Eureka)
+- Service discovery and registration
+- Health monitoring
+- Load balancing support
+
+#### API Gateway (Spring Cloud Gateway)
+- Centralized routing
+- Request/response logging
+- CORS configuration
+- Rate limiting
+- Authentication filter
+
+#### User Service
+- User authentication & authorization
+- JWT token management
+- Social OAuth (Google, GitHub)
+- User profile management
+- Password reset & email verification
+- Login rate limiting
+
+#### Notification Service
+- Email notifications via SMTP
+- Template-based emails (Thymeleaf)
+- RabbitMQ integration
+- Retry logic with exponential backoff
+
+#### Project Service
+- Research project management
+- Paper organization
+- Collaboration features
+- Version control for research
+
+### AI Agents (Python + FastAPI)
+
+#### Paper Search
+- Semantic Scholar API integration
+- Advanced search queries
+- Citation network analysis
+- Result ranking and filtering
+
+#### Extractor
+- Multi-method PDF extraction
+- GROBID for structure
+- Table Transformer for tables
+- OCR support (Tesseract)
+- Figure and equation extraction
+- 95%+ extraction coverage
+
+#### Gap Analyzer
+- Research gap identification
+- Literature review automation
+- Trend analysis
+- Recommendation generation
+
+## 🛠️ Development
+
+### Updating Submodules
+
+```bash
+# Update all submodules to latest
+git submodule update --remote --merge
+
+# Update specific submodule
+cd Microservices/user_service
 git pull origin main
+```
 
-# Go back to meta-repo root
+### Working with Submodules
+
+```bash
+# Make changes in a submodule
+cd Frontend
+# ... make your changes ...
+git add .
+git commit -m "Your changes"
+git push
+
+# Update parent repo to track new commit
 cd ..
 git add Frontend
-git commit -m "Updated frontend submodule to latest commit"
+git commit -m "Update Frontend submodule"
 git push
 ```
 
----
-
-## 💡 Working with Submodules
-
-### Pull Latest Changes in All Submodules
+### Running Tests
 
 ```bash
-git submodule update --remote --merge
+# Frontend tests
+cd Frontend && npm test
+
+# Java microservices tests
+cd Microservices/user_service && ./mvnw test
+
+# Python AI agents tests
+cd AI-Agents/extractor && pytest
 ```
 
-### Push New Changes from Inside a Submodule
+## 🌐 Service Endpoints
+
+When running locally with default configuration:
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| Frontend | http://localhost:3000 | Web application |
+| API Gateway | http://localhost:8989 | API entry point |
+| Service Registry | http://localhost:8761 | Eureka dashboard |
+| User Service | http://localhost:8081 | User management |
+| Notification Service | http://localhost:8082 | Email service |
+| Project Service | http://localhost:8083 | Projects API |
+| Paper Search | http://localhost:8001 | Search API |
+| Extractor | http://localhost:8002 | Extraction API |
+| Gap Analyzer | http://localhost:8003 | Analysis API |
+
+## 🔒 Security
+
+- JWT-based authentication
+- Password encryption (BCrypt)
+- Rate limiting on login attempts
+- CORS configuration
+- Secure cookie handling
+- Input validation
+- SQL injection prevention
+
+## 📊 Monitoring & Observability
+
+- Spring Boot Actuator for health checks
+- Request logging in API Gateway
+- Service registry dashboard
+- Application metrics
+- Error tracking and logging
+
+## 🚢 Deployment
+
+### GitHub Actions CI/CD
+
+Automated deployment workflows for all services:
+- `.github/workflows/deploy-frontend.yml`
+- `.github/workflows/deploy-user-service.yml`
+- `.github/workflows/deploy-notification-service.yml`
+- `.github/workflows/deploy-api-gateway.yml`
+- `.github/workflows/deploy-service-registry.yml`
+- `.github/workflows/deploy-project-service.yml`
+- `.github/workflows/deploy-paper-search.yml`
+- `.github/workflows/deploy-extractor.yml`
+- `.github/workflows/deploy-gap-analyzer.yml`
+- `.github/workflows/deploy-infra.yml`
+
+### Manual Deployment
 
 ```bash
-cd Microservices/user-service
-# make changes
-git add .
-git commit -m "Fix: updated user service logic"
-git push origin main
+# Deploy with scripts
+./Scripts/docker.sh up      # Development
+./Scripts/local.sh start    # Local testing
 ```
 
-Then update the pointer in meta-repo:
+## 🤝 Contributing
 
-```bash
-cd ../..
-git add Microservices/user-service
-git commit -m "Update user-service pointer"
-git push
-```
+1. Fork the repository
+2. Create a feature branch
+3. Make changes in the appropriate submodule
+4. Commit changes to submodule
+5. Update parent repo to reference new commit
+6. Create pull request
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+## 👥 Team
+
+ScholarAI Echologyx Team - Hackathon 2025
+
+## 🆘 Support
+
+For issues and questions:
+- Check individual service README files
+- Open an issue in the relevant repository
+- Contact the development team
+
+## 🎯 Roadmap
+
+- [ ] Enhanced AI chat capabilities
+- [ ] Real-time collaboration features
+- [ ] Advanced citation management
+- [ ] Mobile application
+- [ ] Kubernetes deployment
+- [ ] Enhanced analytics dashboard
+- [ ] API rate limiting and quotas
+- [ ] Multi-language support
+
+## 📚 Documentation
+
+Detailed documentation for each component:
+- [Frontend Guide](./Frontend/README.md)
+- [Microservices Architecture](./Microservices/README.md)
+- [AI Agents Overview](./AI-Agents/README.md)
+- [Deployment Guide](./docs/DEPLOYMENT.md)
+- [API Documentation](./docs/API.md)
 
 ---
 
-## ⚙️ CI/CD Strategy
-
-- Each component has its own CI/CD pipeline in its own repo
-- The meta-repo has workflows that:
-  - Validate `.gitmodules` and folder structure
-  - Trigger integration or smoke tests if needed
-  - Detect changes in `Frontend/`, `Microservices/**`, or `AI-Agents/**`
-
----
-
-## 👥 Contributors
-
-This repo is maintained by the ScholarAI team under the `Javafest2025` GitHub organization.
-
-- [Tasriad Ahmed Tias](https://github.com/Tasriad)
-- [Farhad Al-Amin Dipto](https://github.com/Legend-2727)
-
----
-
-## 🛠 Recommended Commands
-
-| Task                            | Command                                                 |
-|---------------------------------|----------------------------------------------------------|
-| Clone with submodules           | `git clone --recurse-submodules <repo-url>`             |
-| Pull all updates                | `git pull && git submodule update --remote --merge`     |
-| Add new submodule               | `git submodule add <repo-url> <path>`                   |
-| Update a submodule              | `cd path && git pull origin main && cd ..`              |
-| Commit updated submodule refs  | `git add path && git commit -m "Update submodule"`      |
-
----
-
-## 📌 Notes
-
-- Only **submodule pointers** are tracked in this repo — actual code lives in their respective repos.
-- This meta-repo is ideal for integration testing, dev onboarding, and central documentation.
+**Built with ❤️ by the ScholarAI Team**
