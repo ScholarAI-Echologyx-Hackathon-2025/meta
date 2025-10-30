@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ###############################################################################
+# AI Generated scripts
 # ScholarAI Meta Repository - Local Development Script
 # Handles git operations for all submodules and main repository
 ###############################################################################

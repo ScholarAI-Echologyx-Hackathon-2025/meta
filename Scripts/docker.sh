@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ###############################################################################
+# AI Generated scripts
 # ScholarAI Meta Repository - Complete Docker Orchestration Script
 # Controls the entire platform: Infrastructure → Backend → Frontend
 ###############################################################################
